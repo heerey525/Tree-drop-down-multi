@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/easyui.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .textbox-addon.textbox-addon-right{
+            display: none;
+        }
+        .textbox.combo{
+            width: 83% !important;
+            padding-left: 10px;
+            padding-right:30px;
+        }
+        #_easyui_textbox_input2{
+            padding:0;
+            margin:0 !important;
+            float: left;
+            min-height: 36px;
+            font-size:14px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            display: block;
+            width: 100% !important;
+
+        }
+        .panel.combo-p.panel-htop{
+            min-width:150px;
+            top: 42px !important;
+        }
+        .tree-node{
+            display: table-cell;/*1必填*/
+            vertical-align: middle;/*2必填*/
+            font-size: 14px;
+            padding: 0 10px;
+            line-height: 36px!important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 36px;
+            width: 100%;
+        }
+        .tree-node span{
+            vertical-align: middle;
+            /*line-height: 36px;*/
+            font-size:14px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .combo-panel.panel-body.panel-body-noheader{
+            display: none;
+            padding: 5px 0;
+            z-index: 999;
+            min-width: 100%;
+            border: 1px solid #d2d2d2;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.12);
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form" action="" lay-filter="">
+    <div class="layui-form-item">
+        树形下拉多选：
+        <div class="layui-inline">
+            <!--multiple="false"支持多选-->
+            <input name="tree" id="tree" multiple="false" style="width: 190px;" panelHeight="300px" class="easyui-combotree layui-input"/>
+        </div>
+    </div>
+    <button  class="layui-btn " lay-submit onclick="getValue()" layui-filter="demo1">提交</button>
+</form>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="layui/layui.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+<script>
+
+
+    function getValue(){
+        var value = $('#tree').combotree('getValues');
+        alert(value)
+    }
+
+
+    // 假数据
+    $('#tree').combotree({
+        // url: 'js/event.json'
+        data:[ {
+            "id" : "1",
+            "text" : "1",
+            "children" : [ {
+                "id" : 11,
+                "text" : "11"
+            }, {
+                "id" : 12,
+                "text" : "12"
+            } ]
+        },{
+        "id":2,
+            "text":"2"
+    },{
+        "id":3,
+            "text":"3"
+    },{
+        "id":4,
+            "text" : "4",
+            "children" : [ {
+            "id" : 41,
+            "text" : "41"
+        }, {
+            "id" : 42,
+            "text" : "42"
+        },{
+            "id" : 43,
+            "text" : "43"
+        },{
+            "id" : 44,
+            "text" : "44"
+        },{
+            "id" : 45,
+            "text" : "45"
+        }]
+    },{
+        "id":5,
+            "text":"5",
+            "children":[{
+            "id" : "a",
+            "text" : "51"
+        },{
+            "id" : "b",
+            "text" : "52"
+        }]
+    }
+
+    ]
+    });
+
+
+
+    layui.use(['form'], function() {
+        var form = layui.form;
+
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+    })
+</script>
+</body>
+</html>
